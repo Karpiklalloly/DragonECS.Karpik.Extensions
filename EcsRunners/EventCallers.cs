@@ -11,20 +11,11 @@ namespace Karpik.Engine.Shared.DragonECS
         
         public void RunOnEvent(ref TEvent evt)
         {
-            try
+            var aspect = _world.GetAspect<TAspect>();
+            if (aspect.IsMatches(evt.Target))
             {
-                var aspect = _world.GetAspect<TAspect>();
-                if (aspect.IsMatches(evt.Target))
-                {
-                    RunOnEvent(ref evt, ref aspect);
-                }
+                RunOnEvent(ref evt, ref aspect);
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            
         }
         
         protected abstract void RunOnEvent(ref TEvent evt, ref TAspect aspect);
@@ -42,20 +33,11 @@ namespace Karpik.Engine.Shared.DragonECS
         
         public void RunOnRequest(ref TRequest evt)
         {
-            try
+            var aspect = _world.GetAspect<TAspect>();
+            if (aspect.IsMatches(evt.Target))
             {
-                var aspect = _world.GetAspect<TAspect>();
-                if (aspect.IsMatches(evt.Target))
-                {
-                    RunOnEvent(ref evt, ref aspect);
-                }
+                RunOnEvent(ref evt, ref aspect);
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            
         }
         
         protected abstract void RunOnEvent(ref TRequest evt, ref TAspect aspect);
